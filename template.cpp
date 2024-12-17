@@ -1,37 +1,46 @@
 #include <iostream>
 #include <vector>
-
 using namespace std;
 
+
+//Linked list загвар класс
 template <typename T>
-class List{
+class LinkedList{
+private:
+  T data;
+  Node *head;
+  Node *next;
+  int size;
 
-  public:
-  // жагсаалтын сүүлд элемент нэмнэ
+public:
+  //Жагсаалтын сүүлд элемент нэмнэ
   void add(T t){
+    Node *newNode = new Node(t);
 
+    size++;
   }
 
-  //index - дүгээрт элеменет оруулна
+  //Index - дүгээрт элемент оруулна
   void insert(T t, int index){
 
   }
 
-  // i-р элементийн утгыг буцаана
+  //i-р элементийн утгыг буцаана
   T get(int index){
 
   }
 
-  //i -р элементийг устгана
+  //i-р элементийг устгана
   void delete(int index){
 
   }
 
-  // //жагсаалтын уртыг буцаана
+  //Жагсаалтын уртыг буцаана
   int length(){
-    
+    return size;
   }
 };
+
 
 int main(){
 

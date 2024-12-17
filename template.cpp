@@ -5,18 +5,54 @@ using namespace std;
 
 //Linked list загвар класс
 template <typename T>
+
 class LinkedList{
-private:
-  T data;
+protected:
+  //Зангилаа бүтэц
+  struct Node{
+    T data;
+    Node *next;
+
+    //Зангилаа бүтцийн байгуулагч функц
+    Node(T d){
+    data = d;
+    next = NULL;
+    }
+  }
+
   Node *head;
-  Node *next;
   int size;
 
+  //Linked list классын байгуулагч функц
+  LinkedList(){
+    size = 0;
+    head = NULL;
+  }
+
+  //Linked list классын устгагч функц
+  ~LinkedList(){
+    while(head){
+      Node *tmp = head;   //элементийг устгахдаа хэрэглэх заагч
+      head = head->next;
+      delete tmp;
+    }
+  }
+
 public:
-  //Жагсаалтын сүүлд элемент нэмнэ
+  //Жагсаалтын сүүлд элементийг нэмэх функц
   void add(T t){
     Node *newNode = new Node(t);
 
+    if(head == NULL){   //Хэрэв элементгүй бол жагсаалтын эхэнд оруулна
+      head = newNode;
+    }
+    else{
+      Node *tmp = head;
+      while(tmp->next){ //Жагсаалтын төгсгөл хүртэл явна
+        tmp = tmp->next;
+      }
+      tmp->next = newNode; //Жагсаалтын төгсгөлд очоод элементийг холбоно
+    }
     size++;
   }
 
@@ -33,6 +69,7 @@ public:
   //i-р элементийг устгана
   void delete(int index){
 
+    size--;
   }
 
   //Жагсаалтын уртыг буцаана
@@ -40,6 +77,7 @@ public:
     return size;
   }
 };
+
 
 
 int main(){

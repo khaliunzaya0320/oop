@@ -39,7 +39,7 @@ class LinkedList{
       }
       else{
         Node<T> *tmp = head;
-        while (tmp->next){
+        while(tmp->next){
           tmp = tmp->next; //Жагсаалтын төгсгөл хүртэл явна
         }
         tmp->next = newNode; //Жагсаалтын төгсгөлд шинэ зангилааг холбоно

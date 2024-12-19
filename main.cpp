@@ -1,8 +1,9 @@
+#include <bits/stdc++.h>
 #include <iostream>
 #include <cstring>
 #include <math.h>
+#include "template.h"
 using namespace std;
-
 
 //Ерөнхий дүрсийн класс
 class Shape{
@@ -163,127 +164,3 @@ class Triangle : public TwoDShape{
       }
     }
 };
-
-
-
-
-//Зангилаа бүтэц
-template <class T>
-struct Node{
-  T data;
-  Node *next;
-};
-
-//Linked list загвар класс
-template <class T> 
-class LinkedList{
-protected:
-  Node<T> *head;
-  int size;
-
-  //Linked list классын байгуулагч функц
-  LinkedList(){
-    size = 0;
-    head = NULL;
-  }
-
-  //Linked list классын устгагч функц
-  ~LinkedList(){
-    while(head){
-      Node<T> *tmp = head;   //элементийг устгахдаа хэрэглэх заагч
-      head = head->next;
-      delete tmp;
-    }
-  }
-
-public:
-  //Жагсаалтын сүүлд элементийг нэмэх функц
-  void add(T t){
-    Node<T> *newNode = new Node<T>;
-    newNode->data = t;
-    newNode->next = NULL;
-
-    if(head == NULL){   //Хэрэв элементгүй бол жагсаалтын эхэнд оруулна
-      head = newNode;
-    }
-    else{
-      Node<T> *tmp = head;
-      while(tmp->next){ //Жагсаалтын төгсгөл хүртэл явна
-        tmp = tmp->next;
-      }
-      tmp->next = newNode; //Жагсаалтын төгсгөлд очоод элементийг холбоно
-    }
-    size++;
-  }
-
-  //Index - дүгээрт элемент оруулна
-  void insert(T t, int index){
-    if(index == 0){
-      Node<T> *newNode = new Node<T>;
-      newNode->data = t;
-      newNode->next = head;
-      head = newNode;
-    }
-    Node *newNode = new Node(t);  //Шинэ элемент үүсгэх
-    if(index == 0){               //Эхэнд оруулах
-      newNode->next = head;
-      head = newNode;
-    } 
-    else{
-      Node *tmp = head;
-      for(int i = 0; i < index - 1; ++i){  //Зөв индекс хүртэл
-        tmp = tmp->next;
-      }
-      newNode->next = tmp->next;
-      tmp->next = newNode;  //Индексийн байрлалд элемент оруулах
-    }
-    size++;
-  }
-
-  //i-р элементийн утгыг буцаана
-  T get(int index){
-    if (index < 0 || index >= size) {
-      throw out_of_range("Индекс буруу байна!");
-    }
-    Node *tmp = head;
-    for (int i = 0; i < index; ++i) {  //Индекс хүртэл гүйж элемент олоод буцаах
-      tmp = tmp->next;
-    }
-    return tmp->data;
-  }
-
-  //i-р элементийг устгана
-  void delete(int index){
-    if(index < 0 || index >= size){
-      cout << "Индекс буруу байна!" << endl;
-      return;
-    }
-    Node *toDelete;
-    if(index == 0){                //Эхний элементийг устгах
-      toDelete = head;
-      head = head->next;
-    } 
-    else{
-      Node *tmp = head;
-      for(int i = 0; i < index - 1; ++i){  //Индексийн өмнөх элементийг олох
-        tmp = tmp->next;
-      }
-      toDelete = tmp->next;
-      tmp->next = toDelete->next;  //Элементийг устгах
-    }
-    delete toDelete; 
-    size--;
-  }
-
-  //Жагсаалтын уртыг буцаана
-  int length(){
-    return size;
-  }
-};
-
-
-
-int main(){
-
-  return 0;
-}

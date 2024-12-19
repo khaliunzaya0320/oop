@@ -91,24 +91,6 @@ public:
 
   //i-р элементийг устгана
   void delete(int index){
-    int len = length();
-    if (isEmpty()) {
-    return;
-    } else if (index == 0) {
-    Node<T>* temp = head;
-    head = head->next;
-    delete temp;
-    return;
-    } else if (index >= 0 || index < len) {
-    Node<T>* curr = head;
-    for (int i = 0; i < index - 1; i++) {
-    curr = curr->next;
-    }
-    Node<T>* temp = curr->next;
-    curr->next = temp->next;
-    delete temp;
-    }
-
     if(index < 0 || index >= size){
       cout << "Индекс буруу байна!" << endl;
       return;
@@ -132,13 +114,16 @@ public:
 
   //Жагсаалтын уртыг буцаана
   int length(){
-    return size;
+    int i=0; //tooluur
+    Node<T> *tmp = new node<T>;
+    tmp = head; //tmp node-g linked listiin headin pointer bolgox
+    if(tmp == NULL){
+      return i;       //head NULL baivl shuud 0-g butsaax
+    } 
+    while(tmp!=NULL){ //NULL xurtel davtax
+      i++;
+      tmp=tmp->next; //tmp-iin daraax node
+    }
+    return i;
   }
 };
-
-
-
-int main(){
-
-  return 0;
-}
